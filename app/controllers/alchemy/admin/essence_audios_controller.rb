@@ -1,26 +1,28 @@
 module Alchemy
-  class Admin::EssenceAudiosController < Alchemy::Admin::BaseController
-    authorize_resource class: Alchemy::EssenceAudio
-    before_filter :load_essence
+  module Admin
+    class Admin::EssenceAudiosController < Alchemy::Admin::BaseController
+      authorize_resource class: Alchemy::EssenceAudio
+      before_filter :load_essence
 
-    def update
-      @essence_audio.update(essence_audio_params)
-    end
+      def update
+        @essence_audio.update(essence_audio_params)
+      end
 
-    private
+      private
 
-    def load_essence
-      @essence_audio = EssenceAudio.find(params[:id])
-    end
+      def load_essence
+        @essence_audio = EssenceAudio.find(params[:id])
+      end
 
-    def essence_audio_params
-      params.require(:essence_audio).permit(
-        :width,
-        :height,
-        :show_eq,
-        :show_navigation,
-        :attachment_id
-      )
+      def essence_audio_params
+        params.require(:essence_audio).permit(
+          :width,
+          :height,
+          :show_eq,
+          :show_navigation,
+          :attachment_id
+        )
+      end
     end
   end
 end
